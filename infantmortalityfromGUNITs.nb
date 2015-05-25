@@ -10,58 +10,48 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     13282,        360]
-NotebookOptionsPosition[     12142,        314]
-NotebookOutlinePosition[     12496,        330]
-CellTagsIndexPosition[     12453,        327]
+NotebookDataLength[     11243,        279]
+NotebookOptionsPosition[     10693,        255]
+NotebookOutlinePosition[     11047,        271]
+CellTagsIndexPosition[     11004,        268]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+Cell[TextData[{
+ StyleBox["G-Unit List:", "Subsubtitle"],
+ "\nThe procedure below needs a list of g-units. If you look at the URL of a \
+Vision of Britain page you\[CloseCurlyQuote]ll see the g-unit after unit: \
+http://www.visionofbritain.org.uk/unit/10025904/theme/VITAL. You can also \
+find the G-Units in the boundary shapefiles that you can download from the \
+website. The code below assumes the G-Units are in the first column of a CSV \
+and that there is a header that needs droping."
+}], "Text",
+ CellChangeTimes->{{3.641527800203511*^9, 3.6415278514020767`*^9}, {
+  3.641527978199202*^9, 3.641528109573485*^9}}],
 
 Cell[CellGroupData[{
+
 Cell[BoxData[
- RowBox[{
-  RowBox[{"test", "=", 
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
    RowBox[{
-    RowBox[{
-    "Import", "[", 
-     "\"\</Users/jimclifford/Dropbox/2015/Book2015/londonandregionGUNITS.csv\>\
-\"", "]"}], "[", 
-    RowBox[{"[", 
-     RowBox[{"All", ",", "1"}], "]"}], "]"}]}], 
-  "\[IndentingNewLine]"}]], "Input",
+    RowBox[{"gunitlist", "=", 
+     RowBox[{"Drop", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+        "Import", "[", 
+         "\"\</Users/jimclifford/Dropbox/2015/Book2015/londonandregionGUNITS.\
+csv\>\"", "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", "1"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.6415221265944223`*^9, 3.641522141132801*^9}, {
   3.641523162976404*^9, 3.6415231895044737`*^9}, {3.641523265172792*^9, 
   3.641523269929348*^9}, {3.6415233221757517`*^9, 3.641523400328643*^9}, {
-  3.641523463840611*^9, 3.641523509976272*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"\<\"g_unit\"\>", ",", "10005220", ",", "10029533", ",", "10043967",
-    ",", "10005607", ",", "10030055", ",", "10154730", ",", "10084477", ",", 
-   "10216102", ",", "10029752", ",", "10005322", ",", "10063292", ",", 
-   "10096157", ",", "10211281", ",", "10043748", ",", "10174661", ",", 
-   "10139375", ",", "10029855", ",", "10187590", ",", "10187795", ",", 
-   "10097630", ",", "10043943", ",", "10029983", ",", "10139910", ",", 
-   "10155113", ",", "10167577", ",", "10112059", ",", "10139946", ",", 
-   "10081749", ",", "10085469", ",", "10139648", ",", "10154900", ",", 
-   "10043736", ",", "10111936", ",", "10111729", ",", "10167681", ",", 
-   "10167450", ",", "10111675", ",", "10488011", ",", "10093351", ",", 
-   "10202516", ",", "10477013", ",", "10075464"}], "}"}]], "Output",
- CellChangeTimes->{
-  3.6415232705394297`*^9, {3.641523357372355*^9, 3.641523400785719*^9}, 
-   3.641523480083143*^9, 3.641523511016547*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"gunitlist", "=", 
-  RowBox[{"Drop", "[", 
-   RowBox[{"test", ",", "1"}], "]"}]}]], "Input",
- CellChangeTimes->{{3.641523412293015*^9, 3.6415234219282417`*^9}, {
-  3.641523517130802*^9, 3.641523555014941*^9}}],
+  3.641523463840611*^9, 3.641523509976272*^9}, {3.64152760084261*^9, 
+  3.641527637833563*^9}, {3.641527767069848*^9, 3.641527794380245*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -77,20 +67,32 @@ Cell[BoxData[
    "10111936", ",", "10111729", ",", "10167681", ",", "10167450", ",", 
    "10111675", ",", "10488011", ",", "10093351", ",", "10202516", ",", 
    "10477013", ",", "10075464"}], "}"}]], "Output",
- CellChangeTimes->{
-  3.641523422838273*^9, {3.64152352641918*^9, 3.641523555965869*^9}}]
+ CellChangeTimes->{3.64152778890095*^9}]
 }, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{3.641527785062581*^9}],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["gunitlist"], "Input",
- CellChangeTimes->{{3.6415232583418903`*^9, 3.6415232597226763`*^9}}],
+Cell[TextData[{
+ StyleBox["Procedure:", "Subsubtitle"],
+ StyleBox["\nThis procedure takes a list of g units and downloads the Total \
+Births and Infant deaths for all of the years avalible. It then devides the \
+deaths by the births and multiplies by 1000 to get the infant mortality per \
+1000 births rate. It exports a CSV file with the year, g unit, location name, \
+total births, infant deaths and infant mortality rate (IMR) for each loaction \
+and a file with all of the data in one CSV. There are two pauses built in to \
+avoid hammering the server.", "Text"]
+}], "Section",
+ CellChangeTimes->{{3.641527721791195*^9, 3.641527757635356*^9}, {
+  3.641528164357121*^9, 3.641528349665162*^9}, {3.641528424531218*^9, 
+  3.6415284578316793`*^9}, {3.641528513735437*^9, 3.64152851719853*^9}}],
 
-Cell[BoxData["gunitlist"], "Output",
- CellChangeTimes->{3.6415232600710163`*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.641523412293015*^9, 3.6415234219282417`*^9}, {
+   3.641523517130802*^9, 3.641523555014941*^9}, {3.6415276194899282`*^9, 
+   3.6415276472076902`*^9}, 3.641527761152382*^9}],
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
@@ -108,7 +110,7 @@ Cell[BoxData[
    RowBox[{"Do", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"Pause", "[", "3", "]"}], ";", 
+      RowBox[{"Pause", "[", "10", "]"}], ";", 
       RowBox[{"exportlist", "=", 
        RowBox[{"{", "}"}]}], ";", 
       RowBox[{"AppendTo", "[", 
@@ -136,6 +138,7 @@ Cell[BoxData[
           RowBox[{"[", "3", "]"}], "]"}], "[", 
          RowBox[{"[", "2", "]"}], "]"}], "[", 
         RowBox[{"[", "2", "]"}], "]"}]}], ";", 
+      RowBox[{"Pause", "[", "3", "]"}], ";", 
       RowBox[{"infantdeaths", " ", "=", " ", 
        RowBox[{
         RowBox[{
@@ -233,8 +236,8 @@ Cell[BoxData[
       RowBox[{"gunit", ",", "gunitlist"}], "}"}]}], "]"}], ";", 
    RowBox[{"Export", "[", 
     RowBox[{
-    "\"\</Users/jimclifford/Dropbox/2015/Book2015/IMRfull.csv\>\"", ",", 
-     "exportfulllist", ",", "\"\<CSV\>\""}], "]"}]}]}]], "Input",
+    "\"\<IMRfull.csv\>\"", ",", "exportfulllist", ",", "\"\<CSV\>\""}], 
+    "]"}]}]}]], "Input",
  CellChangeTimes->{{3.641522156065011*^9, 3.641522156987817*^9}, {
    3.641522247266012*^9, 3.641522247593511*^9}, {3.641522814180996*^9, 
    3.641522832649879*^9}, {3.641523137633304*^9, 3.641523154884981*^9}, {
@@ -246,70 +249,8 @@ Cell[BoxData[
    3.6415249231764402`*^9}, {3.64152551525063*^9, 3.641525538606077*^9}, 
    3.641525751943012*^9, {3.641525797009447*^9, 3.641525810193557*^9}, {
    3.6415258593722267`*^9, 3.6415259024040833`*^9}, {3.641525977002722*^9, 
-   3.641525986321847*^9}}],
-
-Cell[BoxData["\<\"/Users/jimclifford/Dropbox/2015/Book2015/IMRfull.csv\"\>"], \
-"Output",
- CellChangeTimes->{3.641526239607416*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData["location"], "Input",
- CellChangeTimes->{{3.641522203850428*^9, 3.6415222045274477`*^9}}],
-
-Cell[BoxData["\<\"Bethnal Green RegD/PLPar\"\>"], "Output",
- CellChangeTimes->{3.641522205009519*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"function", "[", "10112059", "]"}]], "Input",
- CellChangeTimes->{{3.641522842676997*^9, 3.6415228531368628`*^9}}],
-
-Cell[BoxData["10112059"], "Output",
- CellChangeTimes->{3.641522854769909*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"exportfulllist", "=", 
-   RowBox[{"{", "}"}]}], ";", 
-  RowBox[{"AppendTo", "[", 
-   RowBox[{"exportfulllist", ",", "headers"}], "]"}], ";"}]], "Input",
- CellChangeTimes->{{3.641523702378757*^9, 3.641523734892127*^9}, {
-  3.6415257294969387`*^9, 3.641525734936595*^9}, {3.6415258420352163`*^9, 
-  3.64152584282473*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData["exportfulllist"], "Input",
- CellChangeTimes->{{3.641523741726316*^9, 3.6415237481918583`*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{"\<\"year\"\>", ",", "\<\"g_unit\"\>", ",", "\<\"name\"\>", 
-    ",", "\<\"total_Births\"\>", ",", "\<\"Infant_deaths\"\>", 
-    ",", "\<\"IMR\"\>"}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.6415237491454697`*^9, 3.641523948021412*^9, 
-  3.641524082216671*^9, 3.641525141680622*^9, 3.641525391559368*^9, 
-  3.641525709038053*^9, 3.6415258480454473`*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Export", "[", 
-  RowBox[{
-  "\"\</Users/jimclifford/Dropbox/2015/Book2015/IMRfull.csv\>\"", ",", 
-   "exportfulllist", ",", "\"\<CSV\>\""}], "]"}]], "Input",
- CellChangeTimes->{{3.641524086576397*^9, 3.641524137826388*^9}}],
-
-Cell[BoxData["\<\"/Users/jimclifford/Dropbox/2015/Book2015/IMRfull.csv\"\>"], \
-"Output",
- CellChangeTimes->{3.6415241402240753`*^9, 3.641525400227051*^9}]
+   3.641525986321847*^9}, {3.6415283226508017`*^9, 3.6415283279939327`*^9}, {
+   3.641528437994426*^9, 3.641528484768643*^9}}]
 }, Open  ]]
 },
 WindowSize->{808, 717},
@@ -329,42 +270,19 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[558, 20, 621, 10, 109, "Text"],
 Cell[CellGroupData[{
-Cell[580, 22, 559, 14, 63, "Input"],
-Cell[1142, 38, 971, 15, 114, "Output"]
+Cell[1204, 34, 801, 19, 114, "Input"],
+Cell[2008, 55, 851, 14, 114, "Output"]
 }, Open  ]],
+Cell[2874, 72, 68, 1, 28, "Input"],
 Cell[CellGroupData[{
-Cell[2150, 58, 232, 5, 28, "Input"],
-Cell[2385, 65, 900, 15, 114, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3322, 85, 105, 1, 28, "Input"],
-Cell[3430, 88, 80, 1, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3547, 94, 6587, 154, 522, "Input"],
-Cell[10137, 250, 131, 2, 86, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[10305, 257, 102, 1, 28, "Input"],
-Cell[10410, 260, 101, 1, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[10548, 266, 136, 2, 28, "Input"],
-Cell[10687, 270, 77, 1, 28, "Output"]
-}, Open  ]],
-Cell[10779, 274, 354, 8, 28, "Input"],
-Cell[CellGroupData[{
-Cell[11158, 286, 108, 1, 28, "Input"],
-Cell[11269, 289, 415, 8, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[11721, 302, 247, 5, 46, "Input"],
-Cell[11971, 309, 155, 2, 28, "Output"]
+Cell[2967, 77, 792, 12, 126, "Section"],
+Cell[3762, 91, 220, 3, 28, "Input"],
+Cell[3985, 96, 6692, 156, 522, "Input"]
 }, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
